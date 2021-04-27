@@ -12,7 +12,8 @@ const routes = require('./network/routes');
 const db = require('./db')
 //app.use('app', express.static('public'))
 
-db.connect('mongodb+srv://sa:12345@platzicourse.umytq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+const CONFIG = require('./config.json')
+db.connect(CONFIG.URL_CONECTION)
 app.use(express.json());
 app.use(express.urlencoded({extended : false}));
 routes(app);
