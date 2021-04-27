@@ -10,6 +10,7 @@ const chatStore = require('./store')
         }
         
         const responseStore = await chatStore.add(users)
+  
         resolve(responseStore);
     })
 }
@@ -17,7 +18,22 @@ const chatStore = require('./store')
  function getChatList(IDuser){
     return new Promise( async (resolve, reject)=>{
        const Data = await chatStore.get(IDuser)
-       resolve(Data);
+       chatsList = [];
+       Data.forEach((chat)=>{
+        if(IDuser == chat.userList[0]._id)
+        {
+          Contacto = chat.userList[1]
+        }else{
+         Contacto = chat.userList[0]
+        }
+        const chatComplete = {
+            contacto: Contacto,
+            id_Chat: chat._id
+        }
+        chatsList.push(chatComplete)
+       })
+
+       resolve(chatsList);
     })
 }
 

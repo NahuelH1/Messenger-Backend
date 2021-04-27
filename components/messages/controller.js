@@ -1,4 +1,4 @@
-
+const date = require('date-and-time');
 const storeMessage = require('./store')
 
 function addMessage(user, message, IDchat){
@@ -21,8 +21,20 @@ function addMessage(user, message, IDchat){
 
  function getMessages(chatFilter){
     return new Promise( async (resolve, reject)=>{
-       const Data = await storeMessage.get(chatFilter)
-       resolve(Data);
+       const messageList = await storeMessage.get(chatFilter)
+       const messageListFinal = [];
+       messageList.forEach((message)=>{
+        const messageFinal = {
+            _id: message._id,
+            userId: message.user,
+            time: message.date ,
+            message: message.message,
+        }
+        messageListFinal.push(messageFinal)
+       })
+       
+      
+       resolve(messageListFinal);
     })
 }
 

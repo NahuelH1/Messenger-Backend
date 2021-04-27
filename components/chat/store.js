@@ -1,5 +1,4 @@
 const Model = require('./model');
-
   function add(users)
   {
     const Chat = {
@@ -9,11 +8,12 @@ const Model = require('./model');
     return newDocument.save();
   }
     
-   function get(IDuser)
+  async function get(IDuser)
   {
     const query = {userList: { $all: [IDuser]}}
-    const Data =  Model.find(query);
-    return Data
+    const Chat = await Model.find(query)
+                    .populate("userList")
+    return Chat
   }
 
 

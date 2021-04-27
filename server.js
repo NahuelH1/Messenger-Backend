@@ -26,10 +26,12 @@ const io = require('socket.io', {
 })(server);
 
 io.on('connection', (socket) => {
-
-    socket.on('conectado',()=>{
-        console.log("usuario conectado")
+    
+    socket.on('conectado',(data)=>{
+        console.log(data)
     })
+    socket.emit('message', 'Esto es un mensaje')
+    
  });
  
  

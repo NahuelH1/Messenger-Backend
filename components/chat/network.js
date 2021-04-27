@@ -17,7 +17,6 @@ router.post('/chatCreate', (req, res)=>{
 
 
 router.get('/chatList', (req, res)=>{
-   console.log(req.query.user)
    controller.getChatList(req.query.user)
    .then((data)=>{
       response.success(req, res, data, 200)
